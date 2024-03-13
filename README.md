@@ -1,6 +1,7 @@
 # ESP Music
 A crappy code allowing you to play melody though buzzer.
-It is primarily meant for ESP32-WROOM-32E, but should work on other microcontrollers aswell, since it is implemented in MicroPython.
+It is primarily meant for ESP32-WROOM-32E, but should work on other microcontrollers as well, but may require some modifications.
 
-## Note
-**WIP** Don't expect the code to be flawless.
+## Todo
+- [] Use universal duty cycle
+- [] Fix two consecutive notes sounding as one (small delay)
