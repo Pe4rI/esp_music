@@ -7,7 +7,7 @@ from notes import Note
 from tunes import TEST
 
 # initial values
-pwm_pin_4 = PWM(Pin(4))
+pwm_pin_4 = PWM(Pin(33))
 pwm_pin_4.freq(4000)
 pwm_pin_4.duty(0)
 
@@ -25,7 +25,7 @@ for i in TEST:
     
     pwm_pin_4.freq(i.freq())
     pwm_pin_4.duty(i.dut())
-    time.sleep_ms(int(60000/tempo*i.dur() - end_cut))
+    time.sleep_ms(int(200000/tempo*i.dur() - end_cut)) ##200000 hardcoded for now
 
     # the silent part
     pwm_pin_4.duty(0)
