@@ -29,7 +29,7 @@ for i in TEST:
 
     # the silent part
     pwm_pin_4.duty(0)
-    time.sleep_ms(end_cut))
+    time.sleep_ms(end_cut)
     
 # volume 0
 pwm_pin_4.duty(0)
