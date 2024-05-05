@@ -4,4 +4,6 @@ It is primarily meant for ESP32-WROOM-32E, but should work on other microcontrol
 
 ## Todo
 - [ ] Use universal duty cycle
+- [ ] Make class for handling buzzer
+- [ ] Rewrite `note.py` so that it uses buzzer and volume from 0 to 100
 - [X] Fix two consecutive notes sounding as one (small delay)
