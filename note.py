@@ -3,7 +3,7 @@ from values import VALUES
 class Note:
     """Class for handling musical notes"""
 
-    def __init__(self, value: str, duration: float, duty=512):
+    def __init__(self, value: str, duration: float, volume: int = 50):
         """A constructor of the class
         
         Parameters
@@ -17,9 +17,9 @@ class Note:
         self.__freq = VALUES[value]
         self.__dur = duration
         if value == 'pause':
-            self.__duty = 0
+            self.__vol = 0
         else:
-            self.__duty = duty
+            self.__vol = volume
 
     def freq(self) -> int:
         """Returns note's frequency
@@ -43,13 +43,13 @@ class Note:
 
         return self.__dur
 
-    def dut(self) -> int:
-        """Returns note's duty
+    def vol(self) -> int:
+        """Returns note's volume
 
         Returns
         -------
         int
-            the duty of the note
+            the volume of the note
         """
 
-        return self.__duty
+        return self.__vol

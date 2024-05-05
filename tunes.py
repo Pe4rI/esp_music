@@ -1,7 +1,7 @@
 # A file meant for your tunes
 
-import notes
-from notes import Note
+import note
+from note import Note
 
 # Test tune
 # tempo 120bpm

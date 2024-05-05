@@ -1,39 +1,40 @@
-from machine import Pin, PWM
+from machine import Pin, PWM, Timer
 import time
 
 # local
-import notes
-from notes import Note
+import values
+from note import Note
 from tunes import TEST
 
-# initial values
-player_pin = PWM(Pin(33))
-player_pin.freq(4000)
-player_pin.duty(0)
+class Player:
+    def __init__(self, buzzer: Buzzer, tune , tempo: int = 120):
+        self.__buzzer = buzzer
+        self.__tune = tune
+        self.__beat = 60000*4/tempo
+        self.__end_cut = 10
+        self.__timer = Timer(0)
+        self.__iter = 0
 
-# it is necessary to add small intervals of silence,
-# so individual notes may be heard
-end_cut = 10     # ms
+    def tempo(self, tempo: int) -> None:
+        self.__beat = 60000*4/tempo
 
-# play
-tempo = 120
+    def timer(self, timer: Timer) -> None:
+        self.__timer = timer
 
-# calculates lenght of a single beat in miliseconds
-beat = 60000*4/tempo
+    def __silence(self, a):
+        self.__buzzer.reset()
+        self.__iter += 1
 
-for i in TEST:
-    # print('Frequency of ', i.freq(),
-    # 'played for ', 1000/tempo*i.dur(),
-    # 'ms with duty of ', i.dut())
-    
-    player_pin.freq(i.freq())
-    player_pin.duty(i.dut())
-    time.sleep_ms(int(beat*i.dur() - end_cut))
+        self.__timer.init(period = self.__end_cut,
+                   mode = Timer.ONE_SHOT, callback = self.play)
 
-    # the silent part
-    player_pin.duty(0)
-    time.sleep_ms(end_cut)
-    
-# volume 0
-player_pin.duty(0)
- 
+
+    def play(self, a) -> None:
+        if self.__iter < len(self.__tune):
+            i = self.__tune[self.__iter]
+            self.__buzzer.freq(i.freq())
+            self.__buzzer.vol(i.vol())
+
+            self.__timer.init(period = int(self.__beat * i.dur() - self.__end_cut),
+                       mode = Timer.ONE_SHOT, callback = self.__silence)
+
