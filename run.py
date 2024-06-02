@@ -1,6 +1,5 @@
-from player import Player
-from buzzer import Buzzer
+import music
 from tunes import TEST
 
-player = Player(Buzzer(33), TEST, 120)
+player = music.Player(music.Buzzer(33), TEST, 120)
 player.play(a=0)
